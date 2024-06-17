@@ -65,15 +65,16 @@ bool bombUI() {
     secs = 59;
   }
   secs = (secs - 1) % 60;  //with usage of % 60, 'secs' has never been more than 60
+  lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Patlamaya Kalan:");  //It means "Remaining Time to Explode"
   lcd.setCursor(0, 1);
-  if (mins <= 10) {  //without this if condition, if mins < 10 it'll show on lcd like that 2:30
+  if (mins < 10) {  //without this if condition, if mins < 10 it'll show on lcd like that 2:30
     lcd.print("0");  //But now, it's shown as 02:30
   }
   lcd.print(mins);
   lcd.print(":");
-  if (secs <= 10) {  //It's used because of same description above.
+  if (secs < 10) {  //It's used because of same description above.
     lcd.print("0");
   }
   lcd.print(secs);
@@ -105,7 +106,7 @@ void setup() {
 }
 
 void loop() {
-  if ((bombSet && isTimerStarted) && (!exploded && !defused)) {  //This condition statement is written for controlling the timers.
+  if (bombSet && isTimerStarted && !exploded && !defused) {  //This condition statement is written for controlling the timers.
     delayTime = (mins * 60 + secs) * 10;                         //Here 'delayTime' is calculated. It's using for setting frequency of the 'taskBuzzer' timer.
     if (delayTime >= 1000) {                                     //Also, here 'delayTime' variable is normalized. That is used for controlling the 'taskBuzzer' timer.
       delayTime = 1000;
@@ -136,18 +137,19 @@ void information() {  //Information page for users.
   lcd.setCursor(0, 1);
   lcd.print("Onceki syfa '*'");  //It means 'for previous page press '*''.
   lcd.setCursor(0, 0);
-  delay(1500);  //This delay is used for users can easily read information.
+  delay(1000);  //This delay is used for users can easily read information.
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Onay/ileri '#'");  //It means 'for confirm/next press '#''.
   lcd.setCursor(0, 1);
   lcd.print("Iptal/geri '*'");  //It means 'for cancel/back press '*''.
-  delay(1500);
+  delay(1000);
   mainMenu();
 }
 
 void mainMenu() {
-  digitalWrite(gLed, LOW);  //After defusing the bomb green LED turns on. It's guaranteed the LED turned off.
+  digitalWrite(rLed, LOW);
+  digitalWrite(gLed, LOW);  //These lines are guaranteeing the LEDs turned off.
   page = 0;                 //This and next 2 lines are using for controlling the pages (for now they aren't necessary I've added them because I may need them in future)
   nextPage = 1;
   previousPage = 1;
@@ -187,7 +189,7 @@ void mainMenu() {
       lcd.print("Hatali Tuslama...");  //It means "Wrong keystroke made"
       lcd.setCursor(0, 1);
       lcd.print("Menuye Donuluyor...");  //This means "Returning to main menu...."
-      delay(2000);
+      delay(1000);
       break;
   }
 }
@@ -241,7 +243,7 @@ void timeSet() {  //This function is using for getting and storing user's wanted
   lcd.print("Girisi onaylamak");  //This and 238. lines together means that "For confirming to input press '#'"
   lcd.setCursor(0, 1);
   lcd.print("Icin '#' basiniz");  //^^^
-  delay(1500);
+  delay(1000);
   lcd.clear();
   lcd.home();
   lcd.print("Iptal icin");  //This and 244. lines together means that "For cancelling press '*'"
@@ -312,7 +314,7 @@ void setPswd() {  //It's used for setting the bomb's password
   lcd.print("Sfre sadce rakam");  //This and 309. lines mean together "The password can only contain numbers and must be 8 characters"
   lcd.setCursor(0, 1);
   lcd.print("ve 8 krktr olmli");
-  delay(2000);
+  delay(1000);
   lcd.clear();
   lcd.home();
   lcd.print("Sifreyi giriniz:");  //It means "please enter the password"
@@ -343,7 +345,7 @@ void setPswd() {  //It's used for setting the bomb's password
         pswd[i] = NULL;
       }
       mainMenu();
-    } else if (key == '#' && i < pswdLen) {
+    } else if ((key == '#' && i < pswdLen)||(key != '#' && i == pswdLen)) {
       lcd.clear();
       lcd.home();
       lcd.print("Eksk/Hatali Sfre");  //Here writing "Missing/Incorrect password"
