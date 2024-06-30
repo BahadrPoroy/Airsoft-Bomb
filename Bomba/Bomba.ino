@@ -34,7 +34,7 @@ Keypad myKeypad = Keypad(makeKeymap(allKeys), rowPins, columnPins, row, column);
 
 //Definition of variables (Detailed information is given in Readme file)
 bool bombSet = false, defused = false, isTimerStarted = false, exploded = false, isBuzzerActive = false;
-int mins = 15, secs = 0, delayTime = 500, i = 0, page = 0, nextPage, previousPage;
+int mins = 15, secs = 0, delayTime = 500, i = 0;
 char userMins[2], userSecs[2], pswd[8], trypswd[8];
 int minsLen = 2, secsLen = 2, pswdLen = 8, trypswdLen = 8;
 String pswd_str, trypswd_str;
@@ -69,7 +69,7 @@ bool bombUI() {
   lcd.setCursor(0, 0);
   lcd.print("Patlamaya Kalan:");  //It means "Remaining Time to Explode"
   lcd.setCursor(0, 1);
-  if (mins < 10) {  //without this if condition, if mins < 10 it'll show on lcd like that 2:30
+  if (mins < 10) {   //without this if condition, if mins < 10 it'll show on lcd like that 2:30
     lcd.print("0");  //But now, it's shown as 02:30
   }
   lcd.print(mins);
@@ -107,8 +107,8 @@ void setup() {
 
 void loop() {
   if (bombSet && isTimerStarted && !exploded && !defused) {  //This condition statement is written for controlling the timers.
-    delayTime = (mins * 60 + secs) * 10;                         //Here 'delayTime' is calculated. It's using for setting frequency of the 'taskBuzzer' timer.
-    if (delayTime >= 1000) {                                     //Also, here 'delayTime' variable is normalized. That is used for controlling the 'taskBuzzer' timer.
+    delayTime = (mins * 60 + secs) * 10;                     //Here 'delayTime' is calculated. It's using for setting frequency of the 'taskBuzzer' timer.
+    if (delayTime >= 1000) {                                 //Also, here 'delayTime' variable is normalized. That is used for controlling the 'taskBuzzer' timer.
       delayTime = 1000;
     } else if (delayTime <= 10) {  //If 'delayTime' is less than 10 milliseconds the buzzer sound will be just a noise. So, it's used for preventing that.
       delayTime = 10;
@@ -150,9 +150,6 @@ void information() {  //Information page for users.
 void mainMenu() {
   digitalWrite(rLed, LOW);
   digitalWrite(gLed, LOW);  //These lines are guaranteeing the LEDs turned off.
-  page = 0;                 //This and next 2 lines are using for controlling the pages (for now they aren't necessary I've added them because I may need them in future)
-  nextPage = 1;
-  previousPage = 1;
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Zaman ayari 'A'");  //This sentence means "For set the bomb timer press 'A'" It's default is 15 minutes.
@@ -169,38 +166,35 @@ void mainMenu() {
     case 'C':
       printbombtime();
       break;
+    case 'D':
+      about();
+      break;
     case '#':
-      if (nextPage == 1) {
-        menuP2();
-      } else {
-        menuP2();
-      }
+      MenuP1();
       break;
     case '*':
-      if (previousPage == 1) {
-        menuP2();
-      } else {
-        menuP2();
-      }
+      MenuP1();
       break;
     default:
       lcd.clear();
+      tone(buzzerPin, ton);
       lcd.setCursor(0, 0);
       lcd.print("Hatali Tuslama...");  //It means "Wrong keystroke made"
       lcd.setCursor(0, 1);
       lcd.print("Menuye Donuluyor...");  //This means "Returning to main menu...."
+      noTone(buzzerPin);
       delay(1000);
+      mainMenu();
       break;
   }
 }
 
-void menuP2() {
-  page = 1;  //This and next 2 lines descriptions are same with at the 'mainMenu' function
-  nextPage = 0;
-  previousPage = 0;
+void MenuP1() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Kaytl Zmn 'C'");  //It means "For seeing the setted exploding time press 'C'".
+  lcd.setCursor(0, 1);
+  lcd.print("Hakkinda 'D'");
   key = myKeypad.waitForKey();
   switch (key) {
     case 'A':
@@ -212,27 +206,39 @@ void menuP2() {
     case 'C':
       printbombtime();
       break;
+    case 'D':
+      about();
+      break;
     case '#':
-      if (nextPage == 0) {
-        mainMenu();
-      } else {
-        mainMenu();
-      }
+      mainMenu();
       break;
     case '*':
-      if (previousPage == 0) {
-        mainMenu();
-      } else {
-        mainMenu();
-      }
+      mainMenu();
       break;
     default:
       lcd.clear();
+      tone(buzzerPin, ton);
       lcd.setCursor(0, 0);
-      lcd.print("Hatali Tuslama...");
+      lcd.print("Hatali Tuslama...");  //It means "Wrong keystroke made"
       lcd.setCursor(0, 1);
-      lcd.print("Menuye Donuluyor...");
+      lcd.print("Menuye Donuluyor...");  //This means "Returning to main menu...."
+      noTone(buzzerPin);
       delay(1000);
+      mainMenu();
+      break;
+  }  //Undescribed lines descriptions are same with in the 'mainMenu' function
+}
+
+void about() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Poroy Software");  //It means "For seeing the setted exploding time press 'C'".
+  lcd.setCursor(0, 1);
+  lcd.print("v1.2-alpha");
+  key = myKeypad.waitForKey();
+  switch (key) {
+    default:
+      mainMenu();
       break;
   }  //Undescribed lines descriptions are same with in the 'mainMenu' function
 }
@@ -275,9 +281,11 @@ void timeSet() {  //This function is using for getting and storing user's wanted
       mainMenu();
       break;
     } else {
+      tone(buzzerPin, ton);
       lcd.clear();
       lcd.home();
       lcd.print("DAKIKA '0' OLAMAZ");  //If integer value of 'userMins' equals to zero the "Minute can't be 0" will be printed on LCD.
+      noTone(buzzerPin);
       delay(250);
       break;
     }
@@ -345,13 +353,15 @@ void setPswd() {  //It's used for setting the bomb's password
         pswd[i] = NULL;
       }
       mainMenu();
-    } else if ((key == '#' && i < pswdLen)||(key != '#' && i == pswdLen)) {
+    } else if ((key == '#' && i < pswdLen) || (key != '#' && i == pswdLen)) {
+      tone(buzzerPin,ton);
       lcd.clear();
       lcd.home();
       lcd.print("Eksk/Hatali Sfre");  //Here writing "Missing/Incorrect password"
       lcd.setCursor(0, 1);
       lcd.print("Tekrar giriniz");  //It means "please, enter again".
       i = 0;
+      noTone(buzzerPin);
       delay(1000);
       setPswd();
     }
@@ -415,7 +425,7 @@ void bombdefuse() {  //It's continue of 'defusing the bomb' (the starting 'if st
       digitalWrite(gLed, HIGH);
       myKeypad.waitForKey();
       mainMenu();
-    } else if (i < trypswdLen -1 ) {
+    } else if (i < trypswdLen - 1) {
       continue;
     } else {
       lcd.clear();

@@ -1,108 +1,153 @@
-# Airsoft Bomb V1.0 EN/TR User Manual
+\# Airsoft Bomb v1.2-alpha EN/TR User Manual
+
 EN:
-For using at airsoft. (it's not explosive, just a toy)
 
-Hardware:
-	
-	1 x | 4 x 4 Keypad
-	1 x | Arduino Uno
-	1 x | Red LED
-	1 x | Green LED
-	1 x | 2 x 16 LCD
-	1 x | I2C Module
-	2 x | 100 Ohm resistors
-	5 x | Buzzers (active)
+For using at airsoft. (it\'s not explosive, just a toy)
 
-Keypad:
-	1	2	3	A
+**Hardware:**
 
-	4	5	6	B
+1 x \| 4 x 4 Keypad
 
-	7	8	9	C
+1 x \| Arduino Uno
 
-	*	0	#	D
+1 x \| Red LED
 
-User manual:
-	Keys:
-		'*' and '#' keys are using for menu navigations: 
-			Next page = '#'
-		 	Previous page = '*'
+1 x \| Green LED
 
-		Also, they are using for confirm/next and cancel/back functions:
-			Confirm/next = '#'
-			Cancel/back = '*'
+1 x \| 2 x 16 LCD
 
-		'A', 'B' and 'C' keys are using for entering submenus/functions:
-			Time set = 'A'
-			Set the bomb = 'B'
-			Show the stored time = 'C'
+1 x \| I2C Module
 
-		'D' key hasn't had any function yet.
+2 x \| 100 Ohm resistors
 
-Information:
-		The bomb's default timer setting is 15 minutes and 0 seconds (Minutes can NOT be zero).
-		passwords can only contain numbers and must be 8 characters.
-		For exiting the ‘Show the stored time’ screen press any key.
-		The time setting is resetting at the restart of bomb so you must enter it again every time for now, it will be fixed.
-		                                                                                                                       										23:57 5.04.2024
+5 x \| Buzzers (active)
 
+**Keypad:**
 
+1 2 3 A
 
+4 5 6 B
 
+7 8 9 C
 
+\* 0 \# D
 
-# Airsoft Bomba V1.0 EN/TR Kullanma Kýlavuzu
+**User manual:**
+
+Keys:
+
+\'\*\' and \'#\' keys are using for menu navigations:
+
+Next page = \'#\'
+
+Previous page = \'\*\'
+
+Also, they are using for confirm/next and cancel/back functions:
+
+Confirm/next = \'#\'
+
+Cancel/back = \'\*\'
+
+\'A\', \'B\', \'C\' and \'D\' keys are using for entering
+submenus/functions:
+
+Time set = \'A\'
+
+Set the bomb = \'B\'
+
+Show the stored time = \'C\'
+
+Show the about page = \'D\'
+
+**Information:**
+
+The bomb\'s default timer setting is 15 minutes and 0 seconds [(Minutes
+can NOT be zero).]{.underline}
+
+[passwords can only contain numbers and must be 8
+characters.]{.underline}
+
+For exiting the 'Show the stored time' screen press any key.
+
+[The time setting is resetting at the restart of bomb so you must enter
+it again every time for now,]{.underline} it will be fixed.
+
+\# Airsoft Bomba v1.2-alpha EN/TR Kullanma KÄ±lavuzu
+
 TR:
-Airsoft'ta kullanmak içindir. (patlayýcý deðil, sadece bir oyuncaktýr) 
 
-Donaným:
-	
-	1 x | 4 x 4 Tuþ Takýmý 
-	1 x | Arduino Uno 
-	1 x | Kýrmýzý LED 
-	1 x | Yeþil LED 
-	1 x | 2 x 16 LCD ekran 
-	1 x | I2C Modülü 
-	2 x | 100 Ohm direnç 
-	5 x | Buzzer (aktif) 
-	
-Tuþ takýmý: 
-		1 	2 	3 	A
- 		
-		4 	5 	6 	B 
-		
-		7 	8 	9 	C 
-		
-		* 	0 	# 	D 
+Airsoft\'ta kullanmak iÃ§indir. (patlayÄ±cÄ± deÄŸil, sadece bir oyuncaktÄ±r)
 
-Kullaným kýlavuzu: 
-	Tuþlar: 
-		Menüde gezinmek için '*' ve '#' tuþlarý kullanýlmaktadýr: 
-			Sonraki sayfa = '#' 
-			Önceki sayfa = '*' 
-		
-		Ayrýca, onayla/sonraki ve iptal/geri iþlevleri için de kullanýlmaktalar: 
-			Onayla/sonraki = '#' 
-			Ýptal/geri = '*' 
-		
-       'A', 'B' ve 'C' tuþlarý alt menülere/iþlevlere girmek için
-kullanýlmaktadýr: 
-			Zaman ayarý = 'A' 
-			Bombayý ayarla = 'B' 
-			Kaydedilen zamaný göster = 'C' 
+**DonanÄ±m:**
 
-       'D' tuþunun henüz herhangi bir iþlevi yoktur.
+1 x \| 4 x 4 TuÅŸ TakÄ±mÄ±
 
-Bilgi: 
-       Bombanýn varsayýlan zamanlayýcý ayarý 15 dakika 0 saniyedir (Dakika sýfýr OLAMAZ). 
-Parolalar yalnýzca rakam içerebilir ve 8 karakterden oluþmalýdýr. 'Kaydedilen süreyi göster' ekranýndan çýkmak için herhangi bir tuþa
-Basýn. 
-       Bombanýn yeniden baþlatýlmasýnda zaman ayarý sýfýrlanýyor, bu yüzden þimdilik her seferinde tekrar girmelisiniz, düzeltilecektir. 
-       
-23:57 5.04.2024
+1 x \| Arduino Uno
 
+1 x \| KÄ±rmÄ±zÄ± LED
 
+1 x \| YeÅŸil LED
 
+1 x \| 2 x 16 LCD ekran
 
+1 x \| I2C ModÃ¼lÃ¼
 
+2 x \| 100 Ohm direnÃ§
 
+5 x \| Buzzer (aktif)
+
+**TuÅŸ takÄ±mÄ±:**
+
+1 2 3 A
+
+4 5 6 B
+
+7 8 9 C
+
+\* 0 \# D
+
+**KullanÄ±m kÄ±lavuzu:**
+
+TuÅŸlar:
+
+MenÃ¼de gezinmek iÃ§in \'\*\' ve \'#\' tuÅŸlarÄ± kullanÄ±lmaktadÄ±r:
+
+Sonraki sayfa = \'#\'
+
+Ã–nceki sayfa = \'\*\'
+
+AyrÄ±ca, onayla/sonraki ve iptal/geri iÅŸlevleri iÃ§in de kullanÄ±lmaktalar:
+
+Onayla/sonraki = \'#\'
+
+Ä°ptal/geri = \'\*\'
+
+> \'A\', \'B\', \'C\' ve \'D\' tuÅŸlarÄ± alt menÃ¼lere/iÅŸlevlere girmek
+> iÃ§in
+
+kullanÄ±lmaktadÄ±r:
+
+Zaman ayarÄ± = \'A\'
+
+BombayÄ± ayarla = \'B\'
+
+Kaydedilen zamanÄ± gÃ¶ster = \'C\'
+
+HakkÄ±nda sayfasÄ±nÄ± gÃ¶ster = \'D\'
+
+**Bilgi:**
+
+BombanÄ±n varsayÄ±lan zamanlayÄ±cÄ± ayarÄ± 15 dakika 0 saniyedir [(Dakika
+sÄ±fÄ±r OLAMAZ).]{.underline}
+
+> [Parolalar yalnÄ±zca rakam iÃ§erebilir ve 8 karakterden
+> oluÅŸmalÄ±dÄ±r]{.underline}. \'Kaydedilen sÃ¼reyi gÃ¶ster\' ekranÄ±ndan
+> Ã§Ä±kmak iÃ§in herhangi bir tuÅŸa
+
+BasÄ±n.
+
+[BombanÄ±n yeniden baÅŸlatÄ±lmasÄ±nda zaman ayarÄ± sÄ±fÄ±rlanÄ±yor, bu yÃ¼zden
+ÅŸimdilik her seferinde tekrar girmelisiniz,]{.underline}
+dÃ¼zeltilecektir.
+
+> 12:19 30.06.2024
